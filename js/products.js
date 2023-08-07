@@ -5,16 +5,18 @@ let maxCount = undefined;
 
 function setCatID(id) {
 	localStorage.setItem("catID", id);
-	window.location = "products.html";
+	window.location = "product-info.html";
 }
 
 function showCategoriesList() {
 	let htmlContentToAppend = "";
+	document.getElementById("titulo").innerHTML = `<h2>Categorías</h2>
+        <p class="lead">Verás aquí todos los productos de la categorioa ${currentCategoriesArray.catName}.</p>`;
+
 	for (let i = 0; i < currentCategoriesArray.products.length; i++) {
 		let category = currentCategoriesArray.products[i];
-
 		htmlContentToAppend += `
-            <div  class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${category.image}" alt="${category.description}" class="img-thumbnail">
@@ -29,8 +31,7 @@ function showCategoriesList() {
                 </div>
             </div>
             `;
-		document.getElementById("titulo").innerHTML = `<h2>Categorías</h2>
-        <p class="lead">Verás aquí todos los productos de la categorioa ${currentCategoriesArray.catName}.</p>`;
+
 		document.getElementById("containe").innerHTML = htmlContentToAppend;
 	}
 }
