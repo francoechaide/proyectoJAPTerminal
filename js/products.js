@@ -29,7 +29,8 @@ function showCategoriesList() {
                 </div>
             </div>
             `;
-
+		document.getElementById("titulo").innerHTML = `<h2>Categorías</h2>
+        <p class="lead">Verás aquí todos los productos de la categorioa ${currentCategoriesArray.catName}.</p>`;
 		document.getElementById("containe").innerHTML = htmlContentToAppend;
 	}
 }
