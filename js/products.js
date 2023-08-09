@@ -1,4 +1,4 @@
-let currentCategoriesArray = [];
+let currentProductArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
@@ -10,36 +10,40 @@ function setCatID(id) {
 
 function showCategoriesList() {
 	let htmlContentToAppend = "";
-	document.getElementById("titulo").innerHTML = `<h2>Categorías</h2>
-        <p class="lead">Verás aquí todos los productos de la categorioa ${currentCategoriesArray.catName}.</p>`;
+	document.getElementById("titulo").innerHTML = `<h2>Productos</h2>
+        <p class="lead">Verás aquí todos los productos de la categorioa ${currentProductArray.catName}.</p>`;
 
-	for (let i = 0; i < currentCategoriesArray.products.length; i++) {
-		let category = currentCategoriesArray.products[i];
+	for (let i = 0; i < currentProductArray.products.length; i++) {
+		let Productos = currentProductArray.products[i];
+
 		htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${category.image}" alt="${category.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col">
+            <div onclick="setCatID(${Productos.id})"class="nose" class="list-group-item list-group-item-action cursor-active">
+               
+                    <div class="col1">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name} - USD ${category.cost} </h4>
-                            <small class="text-muted">${category.soldCount} artículos</small>
+                            <h4 class="mb-1">${Productos.name}</h4>
+                    
+                            <small class="text-muted">${Productos.soldCount} artículos</small>
                         </div>
-                        <p class="mb-1">${category.description}</p>
+						<h4 class"mb-1">USD${Productos.cost}</h3>
+                        <p class="mb-1">${Productos.description}</p>
                     </div>
                 </div>
             </div>
             `;
 
 		document.getElementById("containe").innerHTML = htmlContentToAppend;
+		let noseElements = document.getElementsByClassName("nose");
+		for (let i = 0; i < noseElements.length; i++) {
+			noseElements[i].style.backgroundImage = "url(" + currentProductArray.products[i].image + ")";
+		}
 	}
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
 	getJSONData(PRODUCTS_URL + localStorage.catID + ".json").then(function (resultObj) {
 		if (resultObj.status === "ok") {
-			currentCategoriesArray = resultObj.data;
+			currentProductArray = resultObj.data;
 			showCategoriesList();
 			//sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
 		}
