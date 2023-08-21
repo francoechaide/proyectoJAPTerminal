@@ -193,6 +193,7 @@ a.custom-card:hover {
 #containe {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+
 	gap: 15px;
 	margin-top: 5px;
 }
@@ -226,9 +227,13 @@ a.custom-card:hover {
 	transform: scale(1);
 }
 #containe .nose:hover .col1 {
-	display: block;
+	display: flex;
+	flex-wrap: wrap;
 	border-style: solid;
 }
 #containe .nose:hover .col1 h4 {
 	color: #0087f7;
+}
+#containe .nose:hover .col1 #precio {
+	color: red;
 }

@@ -17,7 +17,7 @@ function showCategoriesList() {
 		let Productos = currentProductArray.products[i];
 
 		htmlContentToAppend += `
-            <div onclick="setCatID(${Productos.id})"class="nose" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setCatID(${Productos.id})"class="nose" ">
                
                     <div class="col1">
                         <div class="d-flex w-100 justify-content-between">
@@ -25,7 +25,7 @@ function showCategoriesList() {
                     
                             <small class="text-muted">${Productos.soldCount} artículos</small>
                         </div>
-						<h4 class"mb-1">USD${Productos.cost}</h3>
+						<h6 class"mb-1" id="precio">USD ${Productos.cost}</h3>
                         <p class="mb-1">${Productos.description}</p>
                     </div>
                 </div>
