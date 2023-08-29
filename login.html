@@ -9,29 +9,39 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
 </head>
-
-<body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+<body class="iframeContent">
+  <!-- Bootstrap de login.w-->
+  <div>
+  </div>
+  <main class="iframeContent">
+  
+  
+      <div >
+        <input type="text" class="form-control" id="email" placeholder="Email" required>
+       
       </div>
-    </div>
+      <p></p>
+      <div >
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" required>
+        
+      </div>
+      <p><br></p>
+      <div class="checkbox mb-3">
+          <div >
+          <input type="checkbox" value="remember-me"> Recordarme
+          </div>
+          <div >
+          <input type="checkbox" value="mostrarContraseña" id="mostrarContraseña"> Mostrar Contraseña
+          </div>
+      </div>
+      <p><br></p>
+      <div>
+        <p>¿No tienes cuenta? <a href="./signup.html">¡Registrate!</a></p>
+      </div>
+      
+      <button class="w-100 btn btn-lg btn-primary" type="submit" id="log-in-btn">Iniciar Sesión</button>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
   <script src="js/login.js"></script>
 </body>
 
