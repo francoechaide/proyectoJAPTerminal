@@ -1,75 +1,61 @@
 var mostrarContraseña = document.getElementById("mostrarContraseña");
 var contraseña = document.getElementById("floatingPassword");
 
-mostrarContraseña.addEventListener("click", function() {
+mostrarContraseña.addEventListener("click", function () {
     if (contraseña.type === "password") {
         contraseña.type = "text";
     } else {
         contraseña.type = "password";
     }
-  });
+});
 
+const BUTTON = document.getElementById("log-in-btn")
+const EMAIL = document.getElementById("email");
+const PASSWORD = document.getElementById("floatingPassword");
 let logued_in = false
-const button = document.getElementById("log-in-btn")
-const email_cookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("basemail"))
-    .split("=")[1];
 
-    const pw_cookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("basepw"))
-    .split("=")[1];
-    // Se les otorga a las cookies variables constantes para manipularlas
-    let basemail = "";
-    let basepw = "";
-    
-button.addEventListener("click",function(e){
-    try{
-        basemail = JSON.parse(email_cookie);
-        basepw = JSON.parse(pw_cookie);
-    } catch {
-        alert("Sus credenciales no son correctas")
+// Se recuperan las bases de datos del Local Storage
+
+
+BUTTON.addEventListener("click", function (e) {
+
+    let database = JSON.parse(localStorage.getItem("DataBase")) || [];
+    let passwordbase = JSON.parse(localStorage.getItem("PasswordBase")) || [];
+    let matching = false;
+    const login_credentials = {
+        email: EMAIL.value,
+        password: PASSWORD.value
+    };
+
+    if (database.length == 0 && passwordbase.length == 0) {
+        alert("Si aún no tienes una cuenta, por favor regístrate")
     }
-    const email = document.getElementById("email");
-    const pass1 = document.getElementById("floatingPassword");
-    // Comprueba que los campos no esten vacios & Busca en los arrays matcheos de Email y Contraseña
-    if((email.value.length > 0) && (pass1.value.length >= 6)){
-        for(let i = 0; i < basemail.length; i++){
-            if(basemail[i].email_usuario == email.value){
-                
-                if((basemail[i].email_id == basepw[i].email_id)&&(basepw[i].contrasena == pass1.value )){
-                    console.log(`${email.value} ha iniciado sesión con exito`);
-                    logued_in = true;
-                    console.log("Estado del Log-In: ", logued_in);
-                    document.cookie = `logued_in=${true}; path=/`
-                    setTimeout(function(){
-                        top.window.location = "index.html"},2000);
-                } else {
-                    alert("Lo sentimos, pero sus credenciales no son correctas");
+    else if ((EMAIL.value.length > 0) && (PASSWORD.value.length >= 6)) {
+        for (let i = 0; i < database.length; i++) {
+            if (database[i].email_usuario == login_credentials.email) {
+                if ((database[i].email_id == passwordbase[i].email_id) && (passwordbase[i].contrasena == login_credentials.password)) {
+                    matching = true;
+                    login_credentials.username = database[i].username;
+                    login_credentials.fullname = database[i].fullname;
+
                 }
-            } else {
-                alert("Su email no coincide con nuestras bases de datos");
             }
         }
-    } else {
-        alert("Debe llenar los campos para iniciar sesión");
     }
-})
-/*button.addEventListener("click",function(e){
-    logued_in = true
-    console.log("la variable ha cambiado", logued_in)
-    document.cookie = `logued_in=${true}; path=/`
-})
-const nombres_cookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("basenombres"))
-    .split("=")[1];
 
-    const pw_cookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("basepw"))
-    .split("=")[1];
-    // Se les otorga a las cookies variables constantes para manipularlas
-    const basenombres = JSON.parse(nombres_cookie);
-    const basepw = JSON.parse(pw_cookie);*/
+    if (matching) {
+        logued_in = true;
+        // Se guarda variable Logued In y el Email del usuario.
+        localStorage.setItem("loguedIn", true);
+        localStorage.setItem("Email", login_credentials.email);
+        // Se guardan las variables del Username && Fullname
+        localStorage.setItem("username", login_credentials.username)
+        localStorage.setItem("fullname", login_credentials.fullname)
+        setTimeout(function () {
+            top.window.location = "index.html"
+        }, 2000);
+    } else {
+        alert('Sus credenciales no son correctas, pruebe nuevamente')
+    }
+
+});

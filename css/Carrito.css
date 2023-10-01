@@ -1,0 +1,29 @@
+.container-carrito {
+	color: white;
+}
+.container-carrito table {
+	margin: auto;
+	margin-top: 50px;
+}
+.container-carrito h1 {
+	font-size: 40px;
+	text-align: center;
+}
+table {
+	width: 50%;
+	max-width: 768px;
+}
+.trclass {
+	border-top: solid 1px black;
+	border-bottom: solid black 1px;
+	height: 80px;
+	max-width: 768px;
+}
+
+.imgTabla {
+	width: 100px;
+}
+.input {
+	width: 70px;
+	height: 30px;
+}
